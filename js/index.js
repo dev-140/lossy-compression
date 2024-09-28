@@ -13,7 +13,7 @@ $(document).ready(function () {
     }
   });
 
-  // calculate the file size
+  // Calculate the file size
   function base64FileSize(base64String) {
     // The first part of the Base64 string (before the comma) contains metadata
     var stringLength = base64String.length - (base64String.indexOf(",") + 1);
@@ -49,12 +49,16 @@ $(document).ready(function () {
           var canvas = document.createElement("canvas");
           var ctx = canvas.getContext("2d");
 
-          // Set canvas dimensions to the image dimensions
-          canvas.width = img.width;
-          canvas.height = img.height;
+          // Reduce dimensions by 10%
+          var newWidth = img.width * 0.9; // 90% of original width
+          var newHeight = img.height * 0.9; // 90% of original height
 
-          // Draw the image on the canvas
-          ctx.drawImage(img, 0, 0);
+          // Set canvas dimensions to the reduced image dimensions
+          canvas.width = newWidth;
+          canvas.height = newHeight;
+
+          // Draw the image on the canvas with the new dimensions
+          ctx.drawImage(img, 0, 0, newWidth, newHeight);
 
           // Compress the image by lowering quality (0.7 is 70% quality)
           var compressedSrc = canvas.toDataURL(file.type, 0.7);
