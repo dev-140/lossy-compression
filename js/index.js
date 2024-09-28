@@ -48,8 +48,8 @@ $(document).ready(function () {
                     var ctx = canvas.getContext("2d");
 
                     // Reduce dimensions by 50% (can be adjusted)
-                    var newWidth = img.width * 0.5; // 50% of original width
-                    var newHeight = img.height * 0.5; // 50% of original height
+                    var newWidth = img.width * 0.2; // 20% of original width
+                    var newHeight = img.height * 0.2; // 20% of original height
 
                     // Set canvas dimensions to the reduced image dimensions
                     canvas.width = newWidth;
