@@ -1,0 +1,30 @@
+body {
+  background-color: #bedcf7;
+}
+
+.main-body-container {
+  min-height: 500px;
+  background-color: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 10px;
+}
+
+#container {
+  padding: 10px;
+  border: 1px solid #ddd;
+  display: none;
+  gap: 10px;
+}
+#container .image-container img {
+  width: 100%;
+}
+
+#imageContainer {
+  padding: 10px;
+  border: 1px solid #ddd;
+  display: none;
+  gap: 10px;
+}
+#imageContainer .image-container img {
+  width: 100%;
+}/*# sourceMappingURL=style.css.map */

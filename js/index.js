@@ -1,0 +1,80 @@
+$(document).ready(function () {
+  $(".form-select").on("change", function () {
+    var container = this.value;
+
+    console.log(container);
+
+    if (container == 1) {
+      $(".body").removeClass("d-none");
+      $(".container-2").addClass("d-none");
+    } else {
+      $(".body").removeClass("d-none");
+      $(".container-1").addClass("d-none");
+    }
+  });
+
+  // calculate the file size
+  function base64FileSize(base64String) {
+    // The first part of the Base64 string (before the comma) contains metadata
+    var stringLength = base64String.length - (base64String.indexOf(",") + 1);
+    var sizeInBytes = 4 * Math.ceil(stringLength / 3) * 0.5624896334383812;
+    return sizeInBytes;
+  }
+
+  // Handle image upload
+  $("#imageUpload").change(function (e) {
+    var file = e.target.files[0];
+
+    if (file && (file.type === "image/jpeg" || file.type === "image/png")) {
+      var reader = new FileReader();
+
+      // When the image is loaded, display it and compress it
+      reader.onload = function (event) {
+        var originalSrc = event.target.result;
+
+        // Display the original image
+        $("#originalImage").attr("src", originalSrc);
+        $("#container").addClass("d-flex");
+
+        // Show original file size
+        var originalSize = file.size / 1024; // File size in KB
+        $("#originalSize").text(
+          "File Size: " + originalSize.toFixed(2) + " KB"
+        );
+
+        // Create an image object and compress the image using canvas
+        var img = new Image();
+        img.onload = function () {
+          // Compress image using Canvas API
+          var canvas = document.createElement("canvas");
+          var ctx = canvas.getContext("2d");
+
+          // Set canvas dimensions to the image dimensions
+          canvas.width = img.width;
+          canvas.height = img.height;
+
+          // Draw the image on the canvas
+          ctx.drawImage(img, 0, 0);
+
+          // Compress the image by lowering quality (0.7 is 70% quality)
+          var compressedSrc = canvas.toDataURL(file.type, 0.7);
+
+          // Display the compressed image
+          $("#compressedImage").attr("src", compressedSrc);
+
+          // Show compressed file size
+          var compressedSize = base64FileSize(compressedSrc) / 1024;
+          $("#compressedSize").text(
+            "File Size: " + compressedSize.toFixed(2) + " KB"
+          );
+        };
+
+        img.src = originalSrc; // Set image source for the img element
+      };
+
+      reader.readAsDataURL(file); // Read the image as a Data URL
+    } else {
+      alert("Please upload a valid JPEG or PNG image.");
+    }
+  });
+});

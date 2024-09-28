@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JPEG/PNG Image Compression with Size Comparison</title>
+    <style>
+      #container {
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        display: none;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      .image-container {
+        margin-bottom: 20px;
+      }
+      .file-size {
+        font-weight: bold;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Upload and Compress JPEG or PNG Image</h2>
+    <input type="file" id="imageUpload" accept="image/jpeg, image/png" />
+    <div id="container">
+      <div class="image-container">
+        <p>Original Image:</p>
+        <img id="originalImage" src="" alt="Original Image" />
+        <p class="file-size" id="originalSize">File Size: N/A</p>
+      </div>
+      <div class="image-container">
+        <p>Compressed Image:</p>
+        <img id="compressedImage" src="" alt="Compressed Image" />
+        <p class="file-size" id="compressedSize">File Size: N/A</p>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Convert Base64 string to a file size in bytes
+        function base64FileSize(base64String) {
+          // The first part of the Base64 string (before the comma) contains metadata
+          var stringLength =
+            base64String.length - (base64String.indexOf(",") + 1);
+          var sizeInBytes =
+            4 * Math.ceil(stringLength / 3) * 0.5624896334383812;
+          return sizeInBytes;
+        }
+
+        // Handle image upload
+        $("#imageUpload").change(function (e) {
+          var file = e.target.files[0];
+
+          if (
+            file &&
+            (file.type === "image/jpeg" || file.type === "image/png")
+          ) {
+            var reader = new FileReader();
+
+            // When the image is loaded, display it and compress it
+            reader.onload = function (event) {
+              var originalSrc = event.target.result;
+
+              // Display the original image
+              $("#originalImage").attr("src", originalSrc);
+              $("#container").show();
+
+              // Show original file size
+              var originalSize = file.size / 1024; // File size in KB
+              $("#originalSize").text(
+                "File Size: " + originalSize.toFixed(2) + " KB"
+              );
+
+              // Create an image object and compress the image using canvas
+              var img = new Image();
+              img.onload = function () {
+                // Compress image using Canvas API
+                var canvas = document.createElement("canvas");
+                var ctx = canvas.getContext("2d");
+
+                // Set canvas dimensions to the image dimensions
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                // Draw the image on the canvas
+                ctx.drawImage(img, 0, 0);
+
+                // Compress the image by lowering quality (0.7 is 70% quality)
+                var compressedSrc = canvas.toDataURL(file.type, 0.7); // Adjust quality between 0 and 1
+
+                // Display the compressed image
+                $("#compressedImage").attr("src", compressedSrc);
+
+                // Show compressed file size
+                var compressedSize = base64FileSize(compressedSrc) / 1024; // File size in KB
+                $("#compressedSize").text(
+                  "File Size: " + compressedSize.toFixed(2) + " KB"
+                );
+              };
+
+              img.src = originalSrc; // Set image source for the img element
+            };
+
+            reader.readAsDataURL(file); // Read the image as a Data URL
+          } else {
+            alert("Please upload a valid JPEG or PNG image.");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
