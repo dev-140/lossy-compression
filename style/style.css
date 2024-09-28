@@ -1,5 +1,6 @@
 body {
-  background-color: #bedcf7;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(31deg, rgb(2, 0, 36) 0%, rgb(9, 9, 122) 35%, rgb(0, 212, 255) 100%);
 }
 
 .main-body-container {
@@ -14,11 +15,25 @@ body {
   border: 1px solid #ddd;
   display: none;
   gap: 10px;
+  justify-content: space-evenly;
+}
+@media screen and (max-width: 768px) {
+  #container {
+    flex-direction: column;
+  }
 }
 #container .image-container {
-  width: 50%;
+  width: 34%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-#container .image-container img {
+@media screen and (max-width: 768px) {
+  #container .image-container {
+    width: 100%;
+  }
+}
+#container img {
   width: 100%;
 }
 
@@ -27,7 +42,28 @@ body {
   border: 1px solid #ddd;
   display: none;
   gap: 10px;
+  justify-content: space-evenly;
+}
+@media screen and (max-width: 768px) {
+  #imageContainer {
+    flex-direction: column;
+  }
+}
+#imageContainer .image-container {
+  width: 34%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media screen and (max-width: 768px) {
+  #imageContainer .image-container {
+    width: 100%;
+  }
 }
 #imageContainer .image-container img {
   width: 100%;
+}
+
+.color-white {
+  color: #fff;
 }/*# sourceMappingURL=style.css.map */
