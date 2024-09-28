@@ -7,7 +7,7 @@ $(document).ready(function () {
     }
 
     const file = fileInput.files[0];
-    const quality = 0.8; // Set the desired quality level (0 to 1)
+    const quality = 0.01; // Set the desired quality level (0 to 1)
 
     // Create an image element
     const img = new Image();

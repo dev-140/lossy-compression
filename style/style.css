@@ -15,11 +15,11 @@ body {
   display: none;
   gap: 10px;
 }
+#container .image-container {
+  width: 50%;
+}
 #container .image-container img {
   width: 100%;
-}
-#container .image-container #originalImage {
-  width: 90%;
 }
 
 #imageContainer {

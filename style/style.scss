@@ -1,40 +1,37 @@
 body {
-  background-color: #bedcf7;
+    background-color: #bedcf7;
 }
 
 .main-body-container {
-  min-height: 500px;
-  background-color: #fff;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  border-radius: 10px;
+    min-height: 500px;
+    background-color: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 10px;
 }
 
 #container {
-  padding: 10px;
-  border: 1px solid #ddd;
-  display: none;
-  gap: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    display: none;
+    gap: 10px;
 
-  .image-container {
-    img {
-      width: 100%;
+    .image-container {
+        width: 50%;
+        img {
+            width: 100%;
+        }
     }
-
-    #originalImage {
-      width: 90%;
-    }
-  }
 }
 
 #imageContainer {
-  padding: 10px;
-  border: 1px solid #ddd;
-  display: none;
-  gap: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    display: none;
+    gap: 10px;
 
-  .image-container {
-    img {
-      width: 100%;
+    .image-container {
+        img {
+            width: 100%;
+        }
     }
-  }
 }
