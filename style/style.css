@@ -18,6 +18,9 @@ body {
 #container .image-container img {
   width: 100%;
 }
+#container .image-container #originalImage {
+  width: 90%;
+}
 
 #imageContainer {
   padding: 10px;
